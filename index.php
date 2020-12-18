@@ -25,13 +25,24 @@ $pessoas = $lista['pessoas'];
 <table>
 <h2>Pessoas</h2>
 <ul id="item1"></ul>
-<?php foreach($pessoas as $pessoas){ ?>
+<?php foreach($pessoas as $key=>$pessoa){ ?>
 
-  <li><?= $pessoas['nome']; ?></li>
-
-
+  <li>
+    <?= $key . " " . $pessoa['nome']; ?>
+    <form class="form2" action="teste.php" method="post">
+    <button type="submit" name="remove" value="<?= $key ?>">Remover</button>
+    <input type="text" name="nomeFilho" class="inputFilho" style="display:none" value=""></input>
+    <button type="submit" name="index" class="addFilho" value="<?= $key?>">Adicionar Filho</button>
+    </form>
+    <?php if(!empty($pessoa['filhos'])){ ?>
+      <ul>
+      <?php foreach($pessoa['filhos'] as $filho){ ?>
+        <li> <?= $filho ?> </li>
+    <?php  } ?>
+  </ul>
 <?php } ?>
-
+</li>
+<?php } ?>
 </table>
 
 <textarea name="name" rows="8" cols="80" id="json-text">
