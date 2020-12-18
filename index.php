@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 $pessoasJSON = file_get_contents('testJSON.json');
 $lista = json_decode($pessoasJSON, true);
 $pessoas = $lista['pessoas'];
@@ -16,6 +19,12 @@ $pessoas = $lista['pessoas'];
 <button type="button" name="button">Gravar</button>
 <button type="button" name="button">Ler</button>
 
+<?php if(isset($_SESSION['mensagem'])){
+    echo  "<h3> {$_SESSION['mensagem']} </h3>";
+    unset($_SESSION['mensagem']);
+        } ?>
+
+
 <form action="create.php" method="post">
   Nome:
 <input type="text" name="nome"></input>
@@ -28,19 +37,24 @@ $pessoas = $lista['pessoas'];
 <?php foreach($pessoas as $key=>$pessoa){ ?>
 
   <li>
-    <?= $key . " " . $pessoa['nome']; ?>
+    <?= $pessoa['nome'] ?>
     <form class="form2" action="teste.php" method="post">
     <button type="submit" name="remove" value="<?= $key ?>">Remover</button>
     <input type="text" name="nomeFilho" class="inputFilho" style="display:none" value=""></input>
-    <button type="submit" name="index" class="addFilho" value="<?= $key?>">Adicionar Filho</button>
-    </form>
+    <input type="text" name="index" style="display:none" value="<?= $key?>"></input>
+    <button type="submit" class="addFilho" value="<?= $key?>">Adicionar Filho</button>
     <?php if(!empty($pessoa['filhos'])){ ?>
       <ul>
-      <?php foreach($pessoa['filhos'] as $filho){ ?>
-        <li> <?= $filho ?> </li>
+      <?php foreach($pessoa['filhos'] as $key=>$filho){ ?>
+        <li>
+        <?= $filho ?>
+        <button type="submit" name="removeFilho" value=<?= $key?>>Remover</button>
+        </li>
+
     <?php  } ?>
   </ul>
 <?php } ?>
+</form>
 </li>
 <?php } ?>
 </table>
