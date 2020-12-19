@@ -60,4 +60,4 @@
         $insertData = json_encode($lista);
 
         file_put_contents("testJSON.json", $insertData);
-        header('location:index.php');
+        header('location:index.php');      
