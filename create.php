@@ -1,23 +1,18 @@
 <?php
-
 session_start();
+require_once 'funcoes/funcoes.php';
 
-$pessoasJSON = file_get_contents('testJSON.json');
-$lista = json_decode($pessoasJSON, true);
 
-$nome = trim($_POST['nome']);
+if(isset($_POST['nomePessoa'])){
 
-if($_POST && !empty($nome)){
+  $nome = trim($_POST['nomePessoa']);
 
-    $novaPessoa['nome'] = $nome;
-    $novaPessoa['filhos'] = [];
+    if(empty($nome)){
+        $_SESSION['mensagem'] = "Nome da pessoa não pode ser vazio";
+    } else {
+        adicionarPessoa($nome);
+    }
 
-    $lista['pessoas'][] = $novaPessoa;
-
-    $insertData = json_encode($lista);
-    file_put_contents('testJSON.json', $insertData);
-} else {
-  $_SESSION['mensagem'] = "Nome da pessoa não pode ser vazio";
+    header('location:index.php');
+    die();
 }
-
-header('location:index.php');

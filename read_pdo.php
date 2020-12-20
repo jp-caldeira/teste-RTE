@@ -7,7 +7,7 @@ $query->execute();
 
 $pessoas = $query->fetchAll(PDO::FETCH_ASSOC);
 
-var_dump($pessoas);
+//var_dump($pessoas);
 
 foreach ($pessoas as $key=>$pessoa){
 
@@ -28,14 +28,16 @@ foreach ($pessoas as $key=>$pessoa){
      $novaPessoa['nome'] = $nome;
      $novaPessoa["filhos"] = $filhos;
      $filhos = [];
-     var_dump($novaPessoa);
      $lista['pessoas'][] = $novaPessoa;
   }
 
-var_dump($lista);
+// var_dump($lista);
+//
+$listaJSON = json_encode($lista);
 
-$lista_original = json_decode($jsonString, true);
+$jsonString = file_put_contents('testJSON.json', $listaJSON);
 
-$jsonString = file_get_contents('testJSON.json');
+$listaJSON = file_get_contents('testJSON.json');
+$lista_original = json_decode($listaJSON, TRUE);
 
-//var_dump($lista_original['pessoas'][0]);
+var_dump($lista_original['pessoas']);
