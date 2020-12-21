@@ -7,13 +7,13 @@ function adicionarPessoa(string $nome)
   $novaPessoa['nome'] = $nome;
   $novaPessoa['filhos'] = [];
 
-  $pessoasJSON = file_get_contents('testJSON.json');
+  $pessoasJSON = file_get_contents('../json/pessoas.json');
   $lista = json_decode($pessoasJSON, true);
 
   $lista['pessoas'][] = $novaPessoa;
 
   $insertData = json_encode($lista);
-  file_put_contents('testJSON.json', $insertData);
+  file_put_contents('../json/pessoas.json', $insertData);
 }
 
 function removerPessoa($array)
@@ -23,11 +23,11 @@ function removerPessoa($array)
   unset($array[$index]);
 
   $lista['pessoas'] = $array;
-  
+
 
   $insertData = json_encode($lista);
 
-  file_put_contents("testJSON.json", $insertData);
+  file_put_contents("../json/pessoas.json", $insertData);
 }
 
 function removerFilho($array)
@@ -40,7 +40,7 @@ function removerFilho($array)
   $lista['pessoas'] = $array;
   $insertData = json_encode($lista);
 
-  file_put_contents("testJSON.json", $insertData);
+  file_put_contents("../json/pessoas.json", $insertData);
 }
 
 function adicionarFilho($json)
@@ -63,6 +63,6 @@ function adicionarFilho($json)
 
         $insertData = json_encode($lista);
 
-        file_put_contents("testJSON.json", $insertData);
+        file_put_contents("../json/pessoas.json", $insertData);
       }
 }

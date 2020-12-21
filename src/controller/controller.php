@@ -1,16 +1,14 @@
 <?php
 
-require_once "classes/bd.php";
+require_once "../classes/bd.php";
 require_once "connect.php";
-require_once "funcoes/funcoes.php";
+require_once "../funcoes/funcoes.php";
 
     session_start();
 
-    $json = file_get_contents('testJSON.json');
+    $json = file_get_contents('../json/pessoas.json');
     $lista = json_decode($json, true);
     $pessoas = $lista['pessoas'];
-    
-
 
 
     if(isset($_POST['gravar'])){
@@ -26,6 +24,17 @@ require_once "funcoes/funcoes.php";
       $conn->ler($db);
     }
 
+    if(isset($_POST['nomePessoa'])){
+
+      $nome = trim($_POST['nomePessoa']);
+
+        if(empty($nome)){
+            $_SESSION['mensagem'] = "Nome da pessoa não pode ser vazio";
+        } else {
+            adicionarPessoa($nome);
+        }
+    }
+
 
     if(isset($_POST['removePessoa'])){
         removerPessoa($pessoas);
@@ -39,4 +48,4 @@ require_once "funcoes/funcoes.php";
         adicionarFilho($json);
     }
 
-    header('location:index.php');
+    header('location:../../index.php');

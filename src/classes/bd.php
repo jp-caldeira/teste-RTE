@@ -51,7 +51,7 @@ class bd {
 
     $lista['pessoas'] = [];
     $listaJSON = json_encode($lista);
-    $jsonString = file_put_contents('testJSON.json', $listaJSON);    
+    $jsonString = file_put_contents('../json/pessoas.json', $listaJSON);
 
   }
 
@@ -85,7 +85,7 @@ public function ler($db)
       }
 
       $listaJSON = json_encode($lista);
-      $jsonString = file_put_contents('testJSON.json', $listaJSON);
+      $jsonString = file_put_contents('../json/pessoas.json', $listaJSON);
 
 
 }

@@ -1,6 +1,6 @@
 
 
-let buttons = document.getElementsByClassName("addFilho");
+let buttons = document.getElementsByName('addFilho');
 
 for(var index in buttons){
   let button = buttons[index];
