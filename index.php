@@ -1,10 +1,9 @@
 <?php
-
-session_start();
+ session_start();
 
 $pessoasJSON = file_get_contents('src/json/pessoas.json');
 $lista = json_decode($pessoasJSON, true);
-$pessoas = $lista['pessoas'];
+ $pessoas = $lista['pessoas'];
 
 ?>
 
